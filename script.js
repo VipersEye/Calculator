@@ -1,33 +1,39 @@
-function operator(operator, numOne, numTwo = NaN) {
-	let res = NaN;
-	switch(operator) {
-		case '+':
-			res = numOne + numTwo;
-			break;
-		case '-':
-			res = numOne - numTwo;
-			break;
-		case '*':
-			res = numOne * numTwo;
-			break;
-		case '/':
-			res = numOne / numTwo;
-			break;
-		case '%':
-			res = numOne / 100;
-			break;
-		case '+-':
-			res = -numOne;
-			break;
-		case '1/x':
-			res = 1 / numOne;
-			break;
-		case '^2':
-			res = numOne**2;
-			break;
-		case 'sqrt':
-			res = Math.sqrt(numOne);
-			break;
-	}
-	return isNaN(res) || !isFinite(res) ? alert('Something went wrong... Try again') : res;
+const calculator = {
+	history: [],
+    numOne: undefined,
+    numTwo: undefined,
+    operator: undefined,
+    result: undefined,
+    copmute() {
+        switch(this.operator) {
+            case '+':
+                this.res = this.numOne + this.numTwo;
+                break;
+            case '-':
+                this.res = this.numOne - this.numTwo;
+                break;
+            case '*':
+                this.res = this.numOne * this.numTwo;
+                break;
+            case '/':
+                this.res = this.numOne / this.numTwo;
+                break;
+            case '%':
+                this.res = this.numOne / 100;
+                break;
+            case '+-':
+                this.res = -this.numOne;
+                break;
+            case '1/x':
+                this.res = 1 / this.numOne;
+                break;
+            case '^2':
+                this.res = this.numOne**2;
+                break;
+            case 'sqrt':
+                this.res = Math.sqrt(this.numOne);
+                break;
+        }
+        return isNaN(this.res) || !isFinite(this.res) ? alert('Something went wrong... Try again') : this.res;
+    }
 }
