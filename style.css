@@ -28,18 +28,25 @@ h1, h2, h3, h4, h5, h6 {
 
 .display {
     width: 100%;
+    
+    direction: rtl;
+}
+
+.display_result {
+    height: 10%;
+}
+
+.display_number {
     height: 15%;
 
     font-size: 30px;
-
-    direction: rtl;
 }
 
 .btns {
     display: flex;
     flex-wrap: wrap;
 
-    height: 85%;
+    height: 75%;
 }
 
 .btn {
