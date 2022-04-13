@@ -4,7 +4,7 @@ const calculator = {
     numTwo: undefined,
     operator: undefined,
     result: undefined,
-    copmute() {
+    compute() {
         switch(this.operator) {
             case '+':
                 this.res = this.numOne + this.numTwo;
@@ -36,4 +36,17 @@ const calculator = {
         }
         return isNaN(this.res) || !isFinite(this.res) ? alert('Something went wrong... Try again') : this.res;
     }
+}
+
+let display = document.querySelector('.display_number');
+let btnsNumber = document.querySelectorAll('.btn_number');
+
+btnsNumber.forEach(btn => {
+	btn.addEventListener('click', evt=>{
+		displayAddNumber(evt.target.value);
+	});
+});
+
+function displayAddNumber(number) {
+    display.value = (display.value).toString() + number.toString();
 }
