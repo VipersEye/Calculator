@@ -68,12 +68,13 @@ function displayAddNumber(e) {
     let displayResult = document.querySelector('.display_result');
     let newNumeral = e.target.value.toString();
     let currentNumber = displayResult.value.toString();
-    let newNumber = currentNumber + newNumeral;
+    let newNumber = (currentNumber.length == 1 && currentNumber == '0') ? newNumeral : currentNumber + newNumeral;
     displayResult.value = newNumber;
     if (newNumber.length > 15) deleteLastNumeral();
 }
 
 function deleteLastNumeral() {
     let displayResult = document.querySelector('.display_result');
-    displayResult.value = displayResult.value.slice(0, displayResult.value.toString().length - 1);
+    let currentNumber = displayResult.value.toString();
+    displayResult.value = (currentNumber.length == 1) ? '0' : displayResult.value.slice(0, currentNumber.length - 1);
 }
