@@ -57,18 +57,17 @@ btnsFunction.forEach(btn => {
 });
 
 btnsNumber.forEach(btn => {
-	btn.addEventListener('click', displayAddNumber);
+	btn.addEventListener('click', e => {displayAddNumber(e.target.value)});
 });
 
 
 
 
-
-function displayAddNumber(e) {
+function displayAddNumber(number) {
     let displayResult = document.querySelector('.display_result');
-    let newNumeral = e.target.value.toString();
+    let newNumeral = number.toString();
     let currentNumber = displayResult.value.toString();
-    let newNumber = (currentNumber.length == 1 && currentNumber == '0') ? newNumeral : currentNumber + newNumeral;
+    let newNumber = (currentNumber == '0') ? newNumeral : (currentNumber.includes('.') && newNumeral == '.') ? currentNumber : currentNumber + newNumeral;
     displayResult.value = newNumber;
     if (newNumber.length > 15) deleteLastNumeral();
 }
