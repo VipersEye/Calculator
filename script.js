@@ -54,7 +54,7 @@ btnsFunction.forEach(btn => {
             btn.addEventListener('click', deleteLastNumeral);
             break;
         case '=':
-            // btn.addEventListener('click', computeStart);
+            btn.addEventListener('click', computeStart);
             break;
     }
 });
@@ -100,13 +100,34 @@ function operatorAdd(operator) {
     operatorTypeDefine(operator);
 
     if (calculator.operatorType == 'uno') {
-        // computeStart();
+        computeStart();
     }
     else {
         displayResult.value = '0';
         displayOperation.value = calculator.numOne + ' ' + calculator.operator;
     }
 }
+
+function computeStart() {
+    let displayOperation = document.querySelector('.display_operation');
+    let displayResult = document.querySelector('.display_result');
+
+    if (calculator.operatorType == 'uno') {
+        let res = calculator.compute();
+        displayResult.value = res;
+        displayOperation.value = `${calculator.operator}(${calculator.numOne}) = ${res}`; 
+        calculator.numOne = res;
+    }
+
+    else {
+        calculator.numTwo = (calculator.numTwo == undefined) ? Number(displayResult.value) : calculator.numTwo;
+        let res = calculator.compute();
+
+        displayResult.value = res;
+        displayOperation.value = `${calculator.numOne} ${calculator.operator} ${calculator.numTwo} = ${res}`; 
+        calculator.numOne = res;
+    }
+};
 
 
 
@@ -147,6 +168,9 @@ window.addEventListener('keydown', e=> {
         case (e.key == '*'):
         case (e.key == '%'):
             operatorAdd(e.key);
+            break;
+        case (e.key == 'Enter'):
+            computeStart();
             break;
     }
 });
