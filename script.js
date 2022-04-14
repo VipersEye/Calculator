@@ -77,3 +77,27 @@ function deleteLastNumeral() {
     let currentNumber = displayResult.value.toString();
     displayResult.value = (currentNumber.length == 1) ? '0' : displayResult.value.slice(0, currentNumber.length - 1);
 }
+
+
+window.addEventListener('keydown', e=> {
+    switch (true) {
+        case (e.key >= 0 && e.key < 10 || e.key == '.'):
+            displayAddNumber(e.key); 
+            break;
+        case (e.key == 'Backspace'):
+            deleteLastNumeral();
+            break;
+        case (e.key == '-'):
+            break;
+        case (e.key == '+'):
+            break;
+        case (e.key == '/'):
+            break;
+        case (e.key == '*'):
+            break;
+        case (e.key == '%'):
+            break;
+        case (e.key == '^'):
+            break;
+    }
+});
