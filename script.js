@@ -7,66 +7,57 @@ const calculator = {
     compute() {
         switch(this.operator) {
             case '+':
-                this.res = this.numOne + this.numTwo;
+                this.result = this.numOne + this.numTwo;
                 break;
             case '-':
-                this.res = this.numOne - this.numTwo;
+                this.result = this.numOne - this.numTwo;
                 break;
             case '*':
-                this.res = this.numOne * this.numTwo;
+                this.result = this.numOne * this.numTwo;
                 break;
             case '/':
-                this.res = this.numOne / this.numTwo;
+                this.result = this.numOne / this.numTwo;
                 break;
             case '%':
-                this.res = this.numOne / 100;
+                this.result = this.numOne / 100;
                 break;
-            case '+-':
-                this.res = -this.numOne;
+            case 'negate':
+                this.result = -this.numOne;
                 break;
-            case '1/x':
-                this.res = 1 / this.numOne;
+            case '1/':
+                this.result = 1 / this.numOne;
                 break;
-            case '^2':
-                this.res = this.numOne**2;
+            case 'sqr':
+                this.result = this.numOne**2;
                 break;
-            case 'sqrt':
-                this.res = Math.sqrt(this.numOne);
+            case '√':
+                this.result = Math.sqrt(this.numOne);
                 break;
         }
-        return isNaN(this.res) || !isFinite(this.res) ? alert('Something went wrong... Try again') : this.res;
+        return isNaN(this.result) || !isFinite(this.result) ? alert('Something went wrong... Try again') : this.result;
     }
 }
 
-let display = document.querySelector('.display_number');
 let btnsNumber = document.querySelectorAll('.btn_number');
 
-let btnDeleteLast = document.querySelector('.btn_function[value=Del]');
-
 btnsNumber.forEach(btn => {
-	btn.addEventListener('click', evt=>{
-		displayAddNumber(evt.target.value);
-        numLimitCheck();
-	});
+	btn.addEventListener('click', displayAddNumber);
 });
 
-btnDeleteLast.addEventListener('click', deleteLastNumeral);
 
 
 
 
-
-
-function displayAddNumber(number) {
-    display.value = (display.value).toString() + number.toString();
-}
-
-function numLimitCheck() {
-    if (display.value.toString().length > 16) {
-        deleteLastNumeral();
-    }
+function displayAddNumber(e) {
+    let displayResult = document.querySelector('.display_result');
+    let newNumeral = e.target.value.toString();
+    let currentNumber = displayResult.value.toString();
+    let newNumber = currentNumber + newNumeral;
+    displayResult.value = newNumber;
+    if (newNumber.length > 15) deleteLastNumeral();
 }
 
 function deleteLastNumeral() {
-    display.value = display.value.slice(0, display.value.toString().length - 1);
+    let displayResult = document.querySelector('.display_result');
+    displayResult.value = displayResult.value.slice(0, displayResult.value.toString().length - 1);
 }
