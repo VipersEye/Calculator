@@ -38,7 +38,23 @@ const calculator = {
     }
 }
 
+
+let btnsFunction = document.querySelectorAll('.btn_function');
 let btnsNumber = document.querySelectorAll('.btn_number');
+
+btnsFunction.forEach(btn => {
+    switch (btn.value) {
+        case 'CE':
+            break;
+        case 'C':
+            break;
+        case 'Del':
+            btn.addEventListener('click', deleteLastNumeral);
+            break;
+        case '=':
+            break;
+    }
+});
 
 btnsNumber.forEach(btn => {
 	btn.addEventListener('click', displayAddNumber);
