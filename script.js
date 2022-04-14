@@ -3,6 +3,7 @@ const calculator = {
     numOne: undefined,
     numTwo: undefined,
     operator: undefined,
+    operatorType: undefined,
     result: undefined,
     compute() {
         switch(this.operator) {
@@ -53,6 +54,7 @@ btnsFunction.forEach(btn => {
             btn.addEventListener('click', deleteLastNumeral);
             break;
         case '=':
+            // btn.addEventListener('click', computeStart);
             break;
     }
 });
@@ -88,15 +90,47 @@ function deleteLastNumeral() {
 
 
 function operatorAdd(operator) {
+    calculator.numTwo = undefined;
+
     let displayOperation = document.querySelector('.display_operation');
     let displayResult = document.querySelector('.display_result');
     
     calculator.numOne = Number(displayResult.value);
     calculator.operator = operator;
+    operatorTypeDefine(operator);
 
-    displayResult.value = '0';
-    displayOperation.value = calculator.numOne + ' ' + calculator.operator;
-} 
+    if (calculator.operatorType == 'uno') {
+        // computeStart();
+    }
+    else {
+        displayResult.value = '0';
+        displayOperation.value = calculator.numOne + ' ' + calculator.operator;
+    }
+}
+
+
+
+function operatorTypeDefine(operator) {
+    switch(operator) {
+        case '%':
+        case 'negate':
+        case '1/':
+        case 'sqr':
+        case '√':
+            calculator.operatorType = 'uno';
+            break;
+        case '+':
+        case '-':
+        case '/':
+        case '*':
+            calculator.operatorType = 'bin';
+            break;
+    }
+}
+
+
+
+
 
 
 window.addEventListener('keydown', e=> {
