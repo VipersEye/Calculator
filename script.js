@@ -40,6 +40,7 @@ const calculator = {
 
 
 let btnsFunction = document.querySelectorAll('.btn_function');
+let btnsOperator = document.querySelectorAll('.btn_operator');
 let btnsNumber = document.querySelectorAll('.btn_number');
 
 btnsFunction.forEach(btn => {
@@ -56,9 +57,16 @@ btnsFunction.forEach(btn => {
     }
 });
 
+btnsOperator.forEach(btn => {
+    btn.addEventListener('click', e => {operatorAdd(e.target.value)});
+});
+
 btnsNumber.forEach(btn => {
 	btn.addEventListener('click', e => {displayAddNumber(e.target.value)});
 });
+
+
+
 
 
 
@@ -79,6 +87,18 @@ function deleteLastNumeral() {
 }
 
 
+function operatorAdd(operator) {
+    let displayOperation = document.querySelector('.display_operation');
+    let displayResult = document.querySelector('.display_result');
+    
+    calculator.numOne = Number(displayResult.value);
+    calculator.operator = operator;
+
+    displayResult.value = '0';
+    displayOperation.value = calculator.numOne + ' ' + calculator.operator;
+} 
+
+
 window.addEventListener('keydown', e=> {
     switch (true) {
         case (e.key >= 0 && e.key < 10 || e.key == '.'):
@@ -88,16 +108,11 @@ window.addEventListener('keydown', e=> {
             deleteLastNumeral();
             break;
         case (e.key == '-'):
-            break;
         case (e.key == '+'):
-            break;
         case (e.key == '/'):
-            break;
         case (e.key == '*'):
-            break;
         case (e.key == '%'):
-            break;
-        case (e.key == '^'):
+            operatorAdd(e.key);
             break;
     }
 });
