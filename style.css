@@ -32,11 +32,11 @@ h1, h2, h3, h4, h5, h6 {
     direction: rtl;
 }
 
-.display_result {
+.display_operation {
     height: 10%;
 }
 
-.display_number {
+.display_result {
     height: 15%;
 
     font-size: 30px;
