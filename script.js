@@ -47,9 +47,10 @@ let btnsNumber = document.querySelectorAll('.btn_number');
 btnsFunction.forEach(btn => {
     switch (btn.value) {
         case 'CE':
+            btn.addEventListener('click', clearSecondOperand);
             break;
         case 'C':
-            btn.addEventListener('click', clearAll)
+            btn.addEventListener('click', clearAll);
             break;
         case 'Del':
             btn.addEventListener('click', deleteLastNumeral);
@@ -147,6 +148,13 @@ function clearAll() {
     calculator.operator = undefined;
     calculator.operatorType = undefined;
     calculator.result = undefined;
+}
+
+function clearSecondOperand() {
+    let displayResult = document.querySelector('.display_result');
+
+    displayResult.value = '0';
+    calculator.numTwo = undefined;
 }
 
 
