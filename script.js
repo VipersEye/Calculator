@@ -49,6 +49,7 @@ btnsFunction.forEach(btn => {
         case 'CE':
             break;
         case 'C':
+            btn.addEventListener('click', clearAll)
             break;
         case 'Del':
             btn.addEventListener('click', deleteLastNumeral);
@@ -72,8 +73,11 @@ btnsNumber.forEach(btn => {
 
 
 
-
 function displayAddNumber(number) {
+    if (calculator.result != undefined) {
+        clearAll();
+    }
+
     let displayResult = document.querySelector('.display_result');
     let newNumeral = number.toString();
     let currentNumber = displayResult.value.toString();
@@ -91,6 +95,8 @@ function deleteLastNumeral() {
 
 function operatorAdd(operator) {
     calculator.numTwo = undefined;
+    calculator.operator = undefined;
+    calculator.result = undefined;
 
     let displayOperation = document.querySelector('.display_operation');
     let displayResult = document.querySelector('.display_result');
@@ -128,6 +134,20 @@ function computeStart() {
         calculator.numOne = res;
     }
 };
+
+
+function clearAll() {
+    let displayOperation = document.querySelector('.display_operation');
+    let displayResult = document.querySelector('.display_result');
+
+    displayOperation.value = '';
+    displayResult.value = '0';
+    calculator.numOne = undefined;
+    calculator.numTwo = undefined;
+    calculator.operator = undefined;
+    calculator.operatorType = undefined;
+    calculator.result = undefined;
+}
 
 
 
