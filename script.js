@@ -1,40 +1,42 @@
 const calculator = {
 	history: [],
-    numOne: undefined,
-    numTwo: undefined,
+    operandFirst: undefined,
+    operandSecond: undefined,
     operator: undefined,
     operatorType: undefined,
     result: undefined,
     compute() {
-        switch(this.operator) {
+        let {operandFirst, operandSecond, operator, result} = calculator;
+        switch(operator) {
             case '+':
-                this.result = this.numOne + this.numTwo;
+                result = operandFirst + operandSecond;
                 break;
             case '-':
-                this.result = this.numOne - this.numTwo;
+                result = operandFirst - operandSecond;
                 break;
             case '*':
-                this.result = this.numOne * this.numTwo;
+                result = operandFirst * operandSecond;
                 break;
             case '/':
-                this.result = this.numOne / this.numTwo;
+                result = operandFirst / operandSecond;
                 break;
             case '%':
-                this.result = this.numOne / 100;
+                result = operandFirst / 100;
                 break;
             case 'negate':
-                this.result = -this.numOne;
+                result = -operandFirst;
                 break;
             case '1/':
-                this.result = 1 / this.numOne;
+                result = 1 / operandFirst;
                 break;
             case 'sqr':
-                this.result = this.numOne**2;
+                result = operandFirst**2;
                 break;
             case '√':
-                this.result = Math.sqrt(this.numOne);
+                result = Math.sqrt(operandFirst);
                 break;
         }
+        this.result = result;
         return isNaN(this.result) || !isFinite(this.result) ? alert('Something went wrong... Try again') : this.result;
     }
 }
@@ -56,17 +58,17 @@ btnsFunction.forEach(btn => {
             btn.addEventListener('click', deleteLastNumeral);
             break;
         case '=':
-            btn.addEventListener('click', computeStart);
+            btn.addEventListener('click', startCompute);
             break;
     }
 });
 
 btnsOperator.forEach(btn => {
-    btn.addEventListener('click', e => {operatorAdd(e.target.value)});
+    btn.addEventListener('click', e => { addOperator(e.target.value) });
 });
 
 btnsNumber.forEach(btn => {
-	btn.addEventListener('click', e => {displayAddNumber(e.target.value)});
+	btn.addEventListener('click', e => { addNumeral(e.target.value) });
 });
 
 
@@ -74,65 +76,65 @@ btnsNumber.forEach(btn => {
 
 
 
-function displayAddNumber(number) {
-    if (calculator.result != undefined) {
+function addNumeral(number) {
+    if (calculator.result !== undefined) {
         clearAll();
     }
 
     let displayResult = document.querySelector('.display_result');
     let newNumeral = number.toString();
     let currentNumber = displayResult.value.toString();
-    let newNumber = (currentNumber == '0') ? newNumeral : (currentNumber.includes('.') && newNumeral == '.') ? currentNumber : currentNumber + newNumeral;
-    displayResult.value = newNumber;
-    if (newNumber.length > 15) deleteLastNumeral();
+    let newNumber = (currentNumber === '0') ? newNumeral : (currentNumber.includes('.') && newNumeral === '.') ? currentNumber : currentNumber + newNumeral;
+    displayResult.value = newNumber; /* Refactor */
+    if (newNumber.length > 15) {
+        deleteLastNumeral();
+    }
 }
 
 function deleteLastNumeral() {
     let displayResult = document.querySelector('.display_result');
     let currentNumber = displayResult.value.toString();
-    displayResult.value = (currentNumber.length == 1) ? '0' : displayResult.value.slice(0, currentNumber.length - 1);
+
+    displayResult.value = (currentNumber.length === 1) ? '0' : displayResult.value.slice(0, currentNumber.length - 1);
 }
 
 
-function operatorAdd(operator) {
-    calculator.numTwo = undefined;
+function addOperator(operator) {
+    calculator.operandSecond = undefined;
     calculator.operator = undefined;
     calculator.result = undefined;
 
     let displayOperation = document.querySelector('.display_operation');
     let displayResult = document.querySelector('.display_result');
     
-    calculator.numOne = Number(displayResult.value);
+    calculator.operandFirst = Number(displayResult.value);
     calculator.operator = operator;
-    operatorTypeDefine(operator);
+    defineOperatorType(operator);
 
-    if (calculator.operatorType == 'uno') {
-        computeStart();
-    }
-    else {
+    if (calculator.operatorType === 'uno') {
+        startCompute();
+    } else {
         displayResult.value = '0';
-        displayOperation.value = calculator.numOne + ' ' + calculator.operator;
+        displayOperation.value = calculator.operandFirst + ' ' + calculator.operator;
     }
 }
 
-function computeStart() {
+function startCompute() {
     let displayOperation = document.querySelector('.display_operation');
     let displayResult = document.querySelector('.display_result');
 
-    if (calculator.operatorType == 'uno') {
+    if (calculator.operatorType === 'uno') {
         let res = calculator.compute();
         displayResult.value = res;
-        displayOperation.value = `${calculator.operator}(${calculator.numOne}) = ${res}`; 
-        calculator.numOne = res;
-    }
-
-    else {
-        calculator.numTwo = (calculator.numTwo == undefined) ? Number(displayResult.value) : calculator.numTwo;
+        displayOperation.value = `${calculator.operator}(${calculator.operandFirst}) = ${res}`; 
+        calculator.operandFirst = res;
+    } else {
+        calculator.operandSecond = (calculator.operandSecond === undefined) ? Number(displayResult.value) : calculator.operandSecond;
         let res = calculator.compute();
 
         displayResult.value = res;
-        displayOperation.value = `${calculator.numOne} ${calculator.operator} ${calculator.numTwo} = ${res}`; 
-        calculator.numOne = res;
+        displayOperation.value = `${calculator.operandFirst} ${calculator.operator} ${calculator.operandSecond} = ${res}`; 
+        calculator.operandFirst = res;
     }
 };
 
@@ -143,8 +145,8 @@ function clearAll() {
 
     displayOperation.value = '';
     displayResult.value = '0';
-    calculator.numOne = undefined;
-    calculator.numTwo = undefined;
+    calculator.operandFirst = undefined;
+    calculator.operandSecond = undefined;
     calculator.operator = undefined;
     calculator.operatorType = undefined;
     calculator.result = undefined;
@@ -154,12 +156,12 @@ function clearSecondOperand() {
     let displayResult = document.querySelector('.display_result');
 
     displayResult.value = '0';
-    calculator.numTwo = undefined;
+    calculator.operandSecond = undefined;
 }
 
 
 
-function operatorTypeDefine(operator) {
+function defineOperatorType(operator) {
     switch(operator) {
         case '%':
         case 'negate':
@@ -182,23 +184,23 @@ function operatorTypeDefine(operator) {
 
 
 
-window.addEventListener('keydown', e=> {
+window.addEventListener('keydown', e => {
     switch (true) {
-        case (e.key >= 0 && e.key < 10 || e.key == '.'):
-            displayAddNumber(e.key); 
+        case (e.key >= 0 && e.key < 10 || e.key === '.'):
+            addNumeral(e.key); 
             break;
-        case (e.key == 'Backspace'):
+        case (e.key === 'Backspace'):
             deleteLastNumeral();
             break;
-        case (e.key == '-'):
-        case (e.key == '+'):
-        case (e.key == '/'):
-        case (e.key == '*'):
-        case (e.key == '%'):
-            operatorAdd(e.key);
+        case (e.key === '-'):
+        case (e.key === '+'):
+        case (e.key === '/'):
+        case (e.key === '*'):
+        case (e.key === '%'):
+            addOperator(e.key);
             break;
-        case (e.key == 'Enter'):
-            computeStart();
+        case (e.key === 'Enter'):
+            startCompute();
             break;
     }
 });
