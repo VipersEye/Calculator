@@ -126,9 +126,11 @@ function startCompute() {
         calculator.operandSecond = (calculator.operandSecond === undefined) ? Number(displayResult.value) : calculator.operandSecond;
     }
 
-    let res = calculator.compute();
-    showResult();
-    calculator.operandFirst = res;
+    if (calculator.operator !== undefined) {
+        let res = calculator.compute();
+        showResult();
+        calculator.operandFirst = res;
+    }
 }
 
 function showResult() {
@@ -165,8 +167,6 @@ function clearSecondOperand() {
     displayResult.value = '0';
     calculator.operandSecond = undefined;
 }
-
-
 
 function defineOperatorType(operator) {
     switch(operator) {
