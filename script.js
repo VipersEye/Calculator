@@ -107,15 +107,15 @@ function addOperator(operator) {
     let displayOperation = document.querySelector('.display_operation');
     let displayResult = document.querySelector('.display_result');
     
-    calculator.operandFirst = Number(displayResult.value);
+    calculator.operandFirst = (calculator.operandFirst === undefined) ? Number(displayResult.value) : calculator.operandFirst;
     calculator.operator = operator;
     defineOperatorType(operator);
 
     if (calculator.operatorType === 'uno') {
         startCompute();
     } else {
-        displayResult.value = '0';
         displayOperation.value = calculator.operandFirst + ' ' + calculator.operator;
+        displayResult.value = '0';
     }
 }
 
