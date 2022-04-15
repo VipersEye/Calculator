@@ -85,7 +85,7 @@ function addNumeral(number) {
     let newNumeral = number.toString();
     let currentNumber = displayResult.value.toString();
     let newNumber = (currentNumber === '0') ? newNumeral : (currentNumber.includes('.') && newNumeral === '.') ? currentNumber : currentNumber + newNumeral;
-    displayResult.value = newNumber; /* Refactor */
+    displayResult.value = newNumber;
     if (newNumber.length > 15) {
         deleteLastNumeral();
     }
@@ -120,23 +120,30 @@ function addOperator(operator) {
 }
 
 function startCompute() {
-    let displayOperation = document.querySelector('.display_operation');
     let displayResult = document.querySelector('.display_result');
 
-    if (calculator.operatorType === 'uno') {
-        let res = calculator.compute();
-        displayResult.value = res;
-        displayOperation.value = `${calculator.operator}(${calculator.operandFirst}) = ${res}`; 
-        calculator.operandFirst = res;
-    } else {
+    if (calculator.operatorType === 'bin') {
         calculator.operandSecond = (calculator.operandSecond === undefined) ? Number(displayResult.value) : calculator.operandSecond;
-        let res = calculator.compute();
-
-        displayResult.value = res;
-        displayOperation.value = `${calculator.operandFirst} ${calculator.operator} ${calculator.operandSecond} = ${res}`; 
-        calculator.operandFirst = res;
     }
-};
+
+    let res = calculator.compute();
+    showResult();
+    calculator.operandFirst = res;
+}
+
+function showResult() {
+    let displayOperation = document.querySelector('.display_operation');
+    let displayResult = document.querySelector('.display_result');
+    let{operandFirst, operandSecond, operator, operatorType, result} = calculator;
+
+    if (operatorType === 'uno') {
+        displayOperation.value = `${operator}(${operandFirst}) = ${result}`; 
+    } else {
+        displayOperation.value = `${operandFirst} ${operator} ${operandSecond} = ${result}`; 
+    }
+
+    displayResult.value = result;
+}
 
 
 function clearAll() {
