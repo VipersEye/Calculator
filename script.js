@@ -37,7 +37,7 @@ const calculator = {
                 break;
         }
         this.result = result;
-        return isNaN(this.result) || !isFinite(this.result) ? alert('Something went wrong... Try again') : this.result;
+        return result;
     }
 }
 
@@ -84,7 +84,16 @@ function addNumeral(number) {
     let displayResult = document.querySelector('.display_result');
     let newNumeral = number.toString();
     let currentNumber = displayResult.value.toString();
-    let newNumber = (currentNumber === '0') ? newNumeral : (currentNumber.includes('.') && newNumeral === '.') ? currentNumber : currentNumber + newNumeral;
+    let newNumber;
+
+    if (currentNumber === '0' && newNumeral !== '.') {
+        newNumber = newNumeral;
+    } else if (currentNumber.includes('.') && newNumeral === '.') {
+        newNumber = currentNumber;
+    } else {
+        newNumber = currentNumber + newNumeral;
+    }
+    
     displayResult.value = newNumber;
     if (newNumber.length > 15) {
         deleteLastNumeral();
@@ -102,6 +111,7 @@ function deleteLastNumeral() {
 function addOperator(operator) {
     calculator.operandSecond = undefined;
     calculator.operator = undefined;
+    calculator.operatorType = undefined;
     calculator.result = undefined;
 
     let displayOperation = document.querySelector('.display_operation');
@@ -114,7 +124,7 @@ function addOperator(operator) {
     if (calculator.operatorType === 'uno') {
         startCompute();
     } else {
-        displayOperation.value = calculator.operandFirst + ' ' + calculator.operator;
+        displayOperation.value = `${calculator.operandFirst} ${calculator.operator}`;
         displayResult.value = '0';
     }
 }
@@ -128,9 +138,30 @@ function startCompute() {
 
     if (calculator.operator !== undefined) {
         let res = calculator.compute();
-        showResult();
-        calculator.operandFirst = res;
+        let errorMessage = checkError();
+        if (errorMessage === 'no errors') {
+            showResult();
+            calculator.operandFirst = res;
+        } else {
+            alert(checkError());
+            clearAll();
+        }
     }
+}
+
+function checkError() {
+    let {operator, result} = calculator;
+    let errorMessage = 'no errors';
+
+    switch (true) {
+        case ((operator === '1/' || operator === '/') && result === Infinity):
+            errorMessage = 'Error: trying to divide to zero :(';
+            break;
+        case ( isNaN(result) ):
+            errorMessage = 'Error: trying to find root square of negative number';
+            break;    
+    }
+    return errorMessage;
 }
 
 function showResult() {
@@ -140,13 +171,12 @@ function showResult() {
 
     if (operatorType === 'uno') {
         displayOperation.value = `${operator}(${operandFirst}) = ${result}`; 
+        displayResult.value = result;
     } else {
         displayOperation.value = `${operandFirst} ${operator} ${operandSecond} = ${result}`; 
+        displayResult.value = result;
     }
-
-    displayResult.value = result;
 }
-
 
 function clearAll() {
     let displayOperation = document.querySelector('.display_operation');
