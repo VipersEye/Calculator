@@ -36,8 +36,9 @@ const calculator = {
                 result = Math.sqrt(operandFirst);
                 break;
         }
-        this.result = result;
-        return result;
+        this.result = Number(result.toFixed(5));
+
+        return this.result;
     }
 }
 
