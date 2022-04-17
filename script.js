@@ -141,6 +141,7 @@ function startCompute() {
         let res = calculator.compute();
         let errorMessage = checkError();
         if (errorMessage === 'no errors') {
+            addToHistory();
             showResult();
             calculator.operandFirst = res;
         } else {
@@ -215,6 +216,11 @@ function defineOperatorType(operator) {
             calculator.operatorType = 'bin';
             break;
     }
+}
+
+function addToHistory() {
+    let {operandFirst, operandSecond, operator, operatorType, result} = calculator;
+    calculator.history.push( {operandFirst, operandSecond, operator, operatorType, result} );
 }
 
 
