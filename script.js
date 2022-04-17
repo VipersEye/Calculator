@@ -238,7 +238,19 @@ function addToHistory() {
     historyPanel.appendChild(historyRecord);
 }
 
+function returnToOperation(e) {
+    let recordId = e.target.getAttribute('record');
+    let {operandFirst, operandSecond, operator, operatorType, result} = calculator.history[recordId];
+    calculator.operandFirst = operandFirst;
+    calculator.operandSecond = operandSecond;
+    calculator.operator = operator;
+    calculator.operatorType = operatorType;
+    calculator.result = result;
 
+    showResult();
+
+    calculator.operandFirst = result;
+}
 
 
 
