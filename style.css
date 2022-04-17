@@ -25,6 +25,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 20%;
     height: 50%;
 
+    background: #e5e5e5;
     border: 3px solid #000;
 }
 
@@ -49,10 +50,37 @@ h1, h2, h3, h4, h5, h6 {
     flex-wrap: wrap;
 
     height: 75%;
+
+    gap: 2px;
 }
 
 .btn {
-    width: 25%;
+    flex: 1;
+    min-width: 20%;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+.btn_operator, .btn_function {
+    background: #f0f0f0;
+}
+
+.btn_number, .btn_operator[value='negate'] {
+    background: #fafafa;
+}
+
+.btn_function[value='='] {
+    background: #e5b796;
+}
+
+.btn_function[value='=']:hover {
+    background: #d98360;
+}
+
+.btn_operator:hover, .btn_function:hover, .btn_number:hover {
+    background: #dedede;
 }
 
 .history {
