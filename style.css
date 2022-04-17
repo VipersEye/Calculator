@@ -20,6 +20,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .calc {
+    position: relative;
+
     width: 20%;
     height: 50%;
 
@@ -51,4 +53,33 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn {
     width: 25%;
+}
+
+.history {
+    position: absolute;
+    top: 0;
+    right: -250px;
+    z-index: 1000;
+
+    width: 250px;
+    height: 100%;
+
+    border: 3px solid #000;
+
+    overflow-y: scroll;
+}
+
+.history__item {
+    margin: 20px 0;
+    padding: 30px 20px;
+    
+    border: 1px solid red;
+    
+    cursor: pointer;
+
+    transition: background .2s linear;
+}
+
+.history__item:hover {
+    background: #888;
 }
