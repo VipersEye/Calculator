@@ -219,8 +219,23 @@ function defineOperatorType(operator) {
 }
 
 function addToHistory() {
+    let historyPanel = document.querySelector('.history');
     let {operandFirst, operandSecond, operator, operatorType, result} = calculator;
+
     calculator.history.push( {operandFirst, operandSecond, operator, operatorType, result} );
+    let historyRecord = document.createElement('div');
+    historyRecord.classList.add('history__item');
+    historyRecord.setAttribute('record', calculator.history.length - 1);
+    
+    if (operatorType === 'uno') {
+        historyRecord.textContent = `${operator}(${operandFirst}) = ${result}`; 
+    } else {
+        historyRecord.textContent = `${operandFirst} ${operator} ${operandSecond} = ${result}`; 
+    }
+
+    historyRecord.addEventListener('click', returnToOperation);
+
+    historyPanel.appendChild(historyRecord);
 }
 
 
