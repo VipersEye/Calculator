@@ -165,10 +165,12 @@ h1, h2, h3, h4, h5, h6 {
 
     background: #e6e6e6;
     border: none;
+
+    transition: background .2s linear;
 }
 
 .btn_history:hover {
-    border: 2px solid #383838;
+    background: #d8d8d8;
 }
 
 .history_icon {

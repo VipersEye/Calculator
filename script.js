@@ -47,6 +47,7 @@ let btnsFunction = document.querySelectorAll('.btn_function');
 let btnsOperator = document.querySelectorAll('.btn_operator');
 let btnsNumber = document.querySelectorAll('.btn_number');
 let btnShowHistory = document.querySelector('.btn_history');
+let btnDeleteHistory = document.querySelector('.btn_delete-history');
 
 btnsFunction.forEach(btn => {
     switch (btn.value) {
@@ -74,6 +75,8 @@ btnsNumber.forEach(btn => {
 });
 
 btnShowHistory.addEventListener('click', showHistory);
+
+btnDeleteHistory.addEventListener('click', deleteHistory);
 
 
 
@@ -255,7 +258,18 @@ function returnToOperation(e) {
 
 function showHistory() {
     let history = document.querySelector('.history');
+    let btnDeleteHistory = document.querySelector('.btn_delete-history');
     history.classList.toggle('history_active');
+    btnDeleteHistory.classList.toggle('btn_delete-history_active');
+}
+
+function deleteHistory() {
+    let history = document.querySelector('.history');
+    let records = history.querySelectorAll('.history__item');
+    calculator.history = [];
+    records.forEach(record => {
+        history.removeChild(record);
+    });
 }
 
 
