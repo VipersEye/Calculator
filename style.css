@@ -178,19 +178,20 @@ h1, h2, h3, h4, h5, h6 {
 
 .history {
     position: absolute;
-    bottom: -300px;
+    bottom: -50%;
     left: 0;
     right: 0px;
     z-index: 1;
 
-    height: 300px;
+    padding-bottom: 50px;
+    height: 50%;
 
     background: rgba(230, 230, 230, 0.98);
     border-left: none;
 
     overflow-y: scroll;
 
-    transition: all .3s ease-in-out;
+    transition: all .4s ease-in-out;
 }
 
 .history_active {
@@ -211,4 +212,32 @@ h1, h2, h3, h4, h5, h6 {
 
 .history__item:hover {
     background: #d8d8d8;
+}
+
+.btn_delete-history {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    z-index: 1000;
+
+    padding: 0;
+    width: 70px;
+    height: 70px;
+    min-width: 0;
+    min-height: 0;
+    max-width: inherit;
+
+    background: transparent;
+    opacity: 0;
+
+    transition: opacity 0.3s linear;
+}
+
+.btn_delete-history_active {
+    opacity: 1;
+}
+
+.trash_icon {
+    width: 35px;
+    height: 35px;
 }
