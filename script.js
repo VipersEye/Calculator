@@ -46,6 +46,7 @@ const calculator = {
 let btnsFunction = document.querySelectorAll('.btn_function');
 let btnsOperator = document.querySelectorAll('.btn_operator');
 let btnsNumber = document.querySelectorAll('.btn_number');
+let btnShowHistory = document.querySelector('.btn_history');
 
 btnsFunction.forEach(btn => {
     switch (btn.value) {
@@ -72,7 +73,7 @@ btnsNumber.forEach(btn => {
 	btn.addEventListener('click', e => { addNumeral(e.target.value) });
 });
 
-
+btnShowHistory.addEventListener('click', showHistory);
 
 
 
@@ -250,6 +251,11 @@ function returnToOperation(e) {
     showResult();
 
     calculator.operandFirst = result;
+}
+
+function showHistory() {
+    let history = document.querySelector('.history');
+    history.classList.toggle('history_active');
 }
 
 
