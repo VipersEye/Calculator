@@ -8,27 +8,52 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+
+    <svg style="display: none;">
+
+        <symbol id = 'delete' viewBox="131.04 151.2 437.92 257.6">
+            <g>
+                <path d="m557.76 151.2h-299.04l-122.64 117.04c-3.3594 3.3594-5.0391 7.2812-5.0391 11.762s1.6797 8.9609 5.0391 11.762l122.64 117.04h299.04c6.1602 0 11.199-5.0391 11.199-11.199l0.003907-235.2c0-6.1602-5.0391-11.199-11.199-11.199zm-294.56 246.4-119.28-113.68c-1.1211-1.1211-1.6797-2.2383-1.6797-3.9219 0-1.6797 0.55859-2.8008 1.6797-3.9219l119.28-113.68h294.56v235.2z"/>
+                <path d="m444.64 242.48-8.4023-7.2812-35.84 36.961-37.52-36.398-7.2773 8.3984 36.957 35.84-36.398 37.52 8.3984 7.2812 35.84-36.961 37.523 36.398 7.2773-8.3984-36.961-35.84z"/>
+            </g>
+        </symbol>
+
+        <symbol id = 'history' viewBox="100.8 30.8 498.4 498.4">
+            <g>
+                <path d="m350 30.801c-137.41 0-249.2 111.79-249.2 249.2 0 7.7344 6.2656 14 14 14s14-6.2656 14-14c0-121.97 99.23-221.2 221.2-221.2s221.2 99.23 221.2 221.2-99.23 221.2-221.2 221.2c-101.09 0-189.2-68.293-214.28-166.07-1.9258-7.4883-9.5742-11.973-17.039-10.086-7.4883 1.9219-12.008 9.5469-10.086 17.039 28.254 110.18 127.53 187.12 241.4 187.12 137.41 0 249.2-111.79 249.2-249.2s-111.79-249.2-249.2-249.2zm-86.438 351.7 96.137-92.406c2.75-2.6445 4.3008-6.2852 4.3008-10.098v-174.53c0-7.7344-6.2656-14-14-14s-14 6.2656-14 14v168.57l-91.836 88.27c-5.5703 5.3594-5.7461 14.223-0.39062 19.797 2.75 2.8633 6.418 4.3008 10.098 4.3008 3.4844 0 6.9844-1.293 9.6914-3.9023z"/>
+            </g>
+        </symbol>
+
+    </svg>
+
     <div class="container">
         <div class="calc">
+            <button class="btn_history">
+                <svg class="history_icon">
+                    <use xlink:href="#history"></use>
+                </svg>
+            </button>
             <input type="text" class="display display_operation" readonly>
             <input type="text" class="display display_result" readonly value="0" >
             <div class="btns">
                 <button type="button" class="btn btn_operator" value="%">%</button>
                 <button type="button" class="btn btn_function" value="CE">CE</button>
                 <button type="button" class="btn btn_function" value="C">C</button>
-                <button type="button" class="btn btn_function" value="Del">Del</button>
+                <button type="button" class="btn btn_function" value="Del">
+                    <svg class="delete_icon"><use xlink:href="#delete"></use></svg>
+                </button>
                 <button type="button" class="btn btn_operator" value="1/">1/x</button>
                 <button type="button" class="btn btn_operator" value="sqr">x<sup>2</sup></button>
                 <button type="button" class="btn btn_operator" value="√">√</button>
-                <button type="button" class="btn btn_operator" value="/">/</button>
+                <button type="button" class="btn btn_operator" value="/">÷</button>
                 <button type="button" class="btn btn_number" value="7">7</button>
                 <button type="button" class="btn btn_number" value="8">8</button>
                 <button type="button" class="btn btn_number" value="9">9</button>
-                <button type="button" class="btn btn_operator" value="*">*</button>
+                <button type="button" class="btn btn_operator" value="*">×</button>
                 <button type="button" class="btn btn_number" value="4">4</button>
                 <button type="button" class="btn btn_number" value="5">5</button>
                 <button type="button" class="btn btn_number" value="6">6</button>
-                <button type="button" class="btn btn_operator" value="-">-</button>
+                <button type="button" class="btn btn_operator" value="-">—</button>
                 <button type="button" class="btn btn_number" value="1">1</button>
                 <button type="button" class="btn btn_number" value="2">2</button>
                 <button type="button" class="btn btn_number" value="3">3</button>
@@ -38,7 +63,7 @@
                 <button type="button" class="btn btn_number" value=".">.</button>
                 <button type="button" class="btn btn_function" value="=">=</button>
             </div>
-            <div class="history"></div>
+            <div class="history history_active"></div>
         </div>
         
     </div>
