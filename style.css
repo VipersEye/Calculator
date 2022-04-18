@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:ital,wght@0,500;0,600;0,700;1,400&family=Roboto:wght@100;300;400;500;700&display=swap');
+
 body {
     margin: 0;
+
+    font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -22,92 +26,189 @@ h1, h2, h3, h4, h5, h6 {
 .calc {
     position: relative;
 
-    width: 20%;
-    height: 50%;
+    padding: 45px 5px 5px;
+    width: 28%;
+    height: 70%;
 
     background: #e5e5e5;
-    border: 3px solid #000;
+    box-shadow: 0px 0px 18px rgba(0, 0, 0, .34);
+    border: 1px solid #383838;
+
+    overflow: hidden;
 }
+
+/* displays ==================== */
 
 .display {
     width: 100%;
     
     text-align: right;
+    font-family: 'Roboto';
+
+    border: none;
+    background: #e6e6e6;
+    outline: none;
+    cursor: alias;
 }
 
 .display_operation {
-    height: 10%;
+    height: 5%;
+
+    font-size: 20px;
+    color: #6c6666;
 }
 
 .display_result {
+    padding: 10px 20px;
     height: 15%;
 
-    font-size: 30px;
+    font-size: 65px;
+    font-weight: 500;
 }
+
+/* buttons ==================== */
 
 .btns {
     display: flex;
     flex-wrap: wrap;
 
-    height: 75%;
+    height: 80%;
 
-    gap: 2px;
+    gap: 3px;
 }
 
 .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     flex: 1;
+
+    padding: 0;
     min-width: 20%;
+    min-height: 13%;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 35px;
+    font-weight: 300;
 
     border: none;
 
     cursor: pointer;
+
+    transition: background .2s linear;
 }
 
-.btn_operator, .btn_function {
-    background: #f0f0f0;
+.btn:hover {
+    background: #dedede;
 }
 
-.btn_number, .btn_operator[value='negate'] {
+.btn_number,
+.btn_operator[value='negate'] {
     background: #fafafa;
 }
 
-.btn_function[value='='] {
+.btn_number {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.btn_operator {
+    font-size: 25px;
+}
+
+.btn_function[value = '='] {    
     background: #e5b796;
+}
+
+.delete_icon {
+    height: 22px;
+}
+
+.btn_operator[value = '+'],
+.btn_operator[value = '*'],
+.btn_operator[value = '/'],
+.btn_operator[value = '-'],
+.btn_function[value = '='] {
+    font-size: 35px;
+}
+
+.btn_operator[value = 'sqr'] sup {
+    margin-bottom: 15px;
+
+    font-size: 18px;
+}
+
+.btn_function[value = 'C'],
+.btn_function[value = 'CE'] {
+    font-size: 25px;
 }
 
 .btn_function[value='=']:hover {
     background: #d98360;
 }
 
-.btn_operator:hover, .btn_function:hover, .btn_number:hover {
-    background: #dedede;
+/* history ==================== */
+
+.btn_history {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 70px;
+    height: 70px;
+
+    background: #e6e6e6;
+    border: none;
+}
+
+.btn_history:hover {
+    border: 2px solid #383838;
+}
+
+.history_icon {
+    width: 30px;
+    height: 30px;
 }
 
 .history {
     position: absolute;
-    top: 0;
-    right: -250px;
-    z-index: 1000;
+    bottom: -300px;
+    left: 0;
+    right: 0px;
+    z-index: 1;
 
-    width: 250px;
-    height: 100%;
+    height: 300px;
 
-    border: 3px solid #000;
+    background: rgba(230, 230, 230, 0.98);
+    border-left: none;
 
     overflow-y: scroll;
+
+    transition: all .3s ease-in-out;
+}
+
+.history_active {
+    bottom: 0;
 }
 
 .history__item {
     margin: 20px 0;
-    padding: 30px 20px;
-    
-    border: 1px solid red;
-    
+    padding: 20px 20px;
+
+    font-size: 20px;
+    color: #6c6666;
+        
     cursor: pointer;
 
     transition: background .2s linear;
 }
 
 .history__item:hover {
-    background: #888;
+    background: #d8d8d8;
 }
