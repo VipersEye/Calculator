@@ -42,7 +42,7 @@ const calculator = {
     }
 }
 
-
+let btnsAll = document.querySelectorAll('.btn_number, .btn_operator, .btn_function');
 let btnsFunction = document.querySelectorAll('.btn_function');
 let btnsOperator = document.querySelectorAll('.btn_operator');
 let btnsNumber = document.querySelectorAll('.btn_number');
@@ -78,6 +78,11 @@ btnShowHistory.addEventListener('click', showHistory);
 
 btnDeleteHistory.addEventListener('click', deleteHistory);
 
+btnsAll.forEach(btn => {
+    btn.addEventListener('transitionend', evt => {
+        evt.target.classList.remove('btn_active');
+    });
+});
 
 
 
@@ -278,9 +283,11 @@ function deleteHistory() {
 window.addEventListener('keydown', e => {
     switch (true) {
         case (e.key >= 0 && e.key < 10 || e.key === '.'):
+            document.querySelector(`.btn[value='${e.key}']`).classList.add('btn_active');
             addNumeral(e.key); 
             break;
         case (e.key === 'Backspace'):
+            document.querySelector(`.btn[value='Del']`).classList.add('btn_active');
             deleteLastNumeral();
             break;
         case (e.key === '-'):
@@ -288,9 +295,11 @@ window.addEventListener('keydown', e => {
         case (e.key === '/'):
         case (e.key === '*'):
         case (e.key === '%'):
+            document.querySelector(`.btn[value='${e.key}']`).classList.add('btn_active');
             addOperator(e.key);
             break;
         case (e.key === 'Enter'):
+            document.querySelector(`.btn[value='=']`).classList.add('btn_active');
             startCompute();
             break;
     }

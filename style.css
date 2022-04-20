@@ -148,6 +148,14 @@ h1, h2, h3, h4, h5, h6 {
     background: #d98360;
 }
 
+.btn_active {
+    background: #dedede;
+}
+
+.btn_function[value='='].btn_active {
+    background: #d98360;
+}
+
 /* history ==================== */
 
 .btn_history {
